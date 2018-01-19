@@ -8,7 +8,7 @@ public:
 
     BoundedBuffer::BoundedBuffer(int capacity) {
         this->capacity = capacity;
-        this->queue_ = new queue();
+        this->queue_ = new queue<News>();
         this->size = 0;
     }
 
