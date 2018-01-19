@@ -1,51 +1,54 @@
 #include "BoundedBuffer.h"
 
 using namespace std;
-class Queue
-{
+
+class BoundedBuffer {
+
 public:
 
-    News pop()
-    {
-        unique_lock<std::mutex> mlock(mutex_);
-        while (queue_.empty())
-        {
-            cond_.wait(mlock);
-        }
+    BoundedBuffer::BoundedBuffer(int capacity) {
+        this->capacity = capacity;
+        this->queue_ = new queue();
+        this->size = 0;
+    }
+
+    News BoundedBuffer::remove() {
+        if (isEmpty())
+            return null;
         auto item = queue_.front();
         queue_.pop();
+        size--;
         return item;
     }
 
-    void pop(News& item)
-    {
-        unique_lock<mutex> mlock(mutex_);
-        while (queue_.empty())
-        {
-            cond_.wait(mlock);
-        }
-        item = queue_.front();
-        queue_.pop();
-    }
-
-    void push(const News& item)
-    {
-        std::unique_lock<std::mutex> mlock(mutex_);
+    bool BoundedBuffer::insert(const News &item) {
+        if (isFull())
+            return false;
         queue_.push(item);
-        mlock.unlock();
-        cond_.notify_one();
+        size++;
+        return true;
     }
 
-    void push(News&& item)
-    {
-        std::unique_lock<std::mutex> mlock(mutex_);
-        queue_.push(std::move(item));
-        mlock.unlock();
-        cond_.notify_one();
+    bool BoundedBuffer::isEmpty() {
+        return size == 0;
     }
 
-private:
-    std::queue<T> queue_;
-    std::mutex mutex_;
-    std::condition_variable cond_;
+    bool BoundedBuffer::isFull() {
+        return size == capacity;
+    }
+
+    void BoundedBuffer::lock() {
+        mutex_.lock();
+    }
+
+    void BoundedBuffer::unlock() {
+        mutex_.unlock();
+    }
+
+    BoundedBuffer::~BoundedBuffer() {
+        delete queue_;
+        delete mutex_;
+    }
+
+
 };

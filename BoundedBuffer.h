@@ -13,4 +13,31 @@
 #include "News.cpp"
 
 using namespace std;
+
+class BoundedBuffer {
+private:
+    int size;
+    int capacity;
+    queue<News> queue_;
+    mutex mutex_;
+    condition_variable cond_;
+
+public:
+    BoundedBuffer(int size);
+
+    ~BoundedBuffer();
+
+    News remove();
+
+    bool insert(const News &item);
+
+    bool isEmpty();
+
+    void lock();
+
+    void unlock();
+
+    bool isFull();
+};
+
 #endif //OS4_BOUNDEDBUFFER_H
