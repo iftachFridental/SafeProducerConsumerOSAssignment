@@ -2,18 +2,16 @@
 
 using namespace std;
 
-class BoundedBuffer {
-
-public:
-
     BoundedBuffer::BoundedBuffer(int capacity) {
         this->capacity = capacity;
         this->size = 0;
     }
 
     News BoundedBuffer::remove() {
-        if (isEmpty())
-            return null;
+        if (isEmpty()) {
+            News *n = new News(regularNews, -1, -1);
+            return *n;
+        }
         auto item = queue_.front();
         queue_.pop();
         size--;
@@ -43,5 +41,3 @@ public:
     void BoundedBuffer::unlock() {
         mutex_.unlock();
     }
-
-};

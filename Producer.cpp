@@ -6,9 +6,6 @@
 
 using namespace std;
 
-class Producer{
-
-public:
     Producer::Producer(int prod_id, int products_num, int q_capacity) {
         this->prod_id = prod_id;
         this->products_num = products_num;
@@ -75,5 +72,3 @@ public:
             t = NULL;
         }
     }
-
-};

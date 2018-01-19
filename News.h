@@ -21,7 +21,7 @@ private:
 public:
     News(NewsType type, int prod_id, int prod_type_id);
 
-    friend ostream &operator<<(ostream &outs, const News *obj);
+    friend std::ostream &operator<<(std::ostream &outs, const News *obj);
 
     std::string toString();
 

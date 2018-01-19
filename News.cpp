@@ -6,9 +6,6 @@
 
 using namespace std;
 
-class News{
-
-public:
     News::News(NewsType type, int prod_id, int prod_type_id) {
         this->prod_id = prod_id;
         this->type = type;
@@ -37,5 +34,3 @@ public:
         string s = "Producer " + prod_id + " " + type_name + " " + prod_type_id;
         return s;
     }
-
-};
