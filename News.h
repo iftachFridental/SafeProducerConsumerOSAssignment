@@ -9,7 +9,7 @@
 #include <string>
 
 enum NewsType {
-    regularNews, weather, sports
+    regularNews, weather, sports, DONE
 };
 
 class News {
@@ -24,6 +24,8 @@ public:
     friend ostream &operator<<(ostream &outs, const News *obj);
 
     std::string toString();
+
+    NewsType getType() { return type; }
 };
 
 

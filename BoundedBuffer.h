@@ -10,7 +10,7 @@
 #include <mutex>
 #include <string>
 #include <condition_variable>
-#include "News.cpp"
+#include "News.h"
 
 using namespace std;
 
@@ -20,7 +20,6 @@ private:
     int capacity;
     queue<News> queue_;
     mutex mutex_;
-    condition_variable cond_;
 
 public:
     BoundedBuffer(int size);
