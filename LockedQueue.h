@@ -9,12 +9,12 @@
 #include <thread>
 #include <mutex>
 #include <string>
-#include "News.h"
+#include "News.cpp"
 
 using namespace std;
 
 class LockedQueue {
-private:
+protected:
     int size;
     queue<News> queue_;
     mutex mutex_;

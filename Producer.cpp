@@ -23,7 +23,6 @@ using namespace std;
     Producer::~Producer() {
         stop();
         delete q_;
-        delete[] type_counters;
     }
 
     News Producer::generateRandomNews() {

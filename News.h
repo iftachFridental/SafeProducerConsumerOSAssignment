@@ -21,13 +21,11 @@ private:
 public:
     News(NewsType type, int prod_id, int prod_type_id);
 
-    friend std::ostream &operator<<(std::ostream &outs, const News *obj);
-
-    std::string toString();
+    std::string toString() const;
 
     NewsType getType() { return type; }
 };
 
-
+std::ostream &operator<<(std::ostream &outs, const News *obj);
 
 #endif //OS4_NEWS_H

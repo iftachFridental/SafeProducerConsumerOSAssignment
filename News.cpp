@@ -12,13 +12,13 @@ using namespace std;
         this->prod_type_id = prod_type_id;
     }
 
-    friend ostream &operator<<(ostream &outs, const News *obj) {
+ostream &operator<<(ostream &outs, const News *obj) {
 
         outs << obj->toString();
         return outs;
     }
 
-    string News::toString() {
+string News::toString() const {
         string type_name = "";
         switch (type) {
             case sports:
