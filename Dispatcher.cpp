@@ -86,3 +86,23 @@ void Dispatcher::sendDones() {
         q->unlock();
     }
 }
+
+BoundedBuffer *Dispatcher::getQByType(NewsType t) {
+
+    int type_ind = -1;
+    switch (t) {
+        case regularNews:
+            type_ind = 0;
+            break;
+        case weather:
+            type_ind = 1;
+            break;
+        case sports:
+            type_ind = 2;
+            break;
+        case DONE:
+            return nullptr;
+    }
+    return types_list[type_ind];
+
+}

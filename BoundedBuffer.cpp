@@ -7,17 +7,6 @@ using namespace std;
         this->size = 0;
     }
 
-    News BoundedBuffer::remove() {
-        if (isEmpty()) {
-            News *n = new News(regularNews, -1, -1);
-            return *n;
-        }
-        auto item = queue_.front();
-        queue_.pop();
-        size--;
-        return item;
-    }
-
     bool BoundedBuffer::insert(const News &item) {
         if (isFull())
             return false;
@@ -26,18 +15,6 @@ using namespace std;
         return true;
     }
 
-    bool BoundedBuffer::isEmpty() {
-        return size == 0;
-    }
-
     bool BoundedBuffer::isFull() {
         return size == capacity;
-    }
-
-    void BoundedBuffer::lock() {
-        mutex_.lock();
-    }
-
-    void BoundedBuffer::unlock() {
-        mutex_.unlock();
     }

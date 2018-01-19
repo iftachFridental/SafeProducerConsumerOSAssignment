@@ -5,24 +5,17 @@
 #ifndef OS4_BOUNDEDBUFFER_H
 #define OS4_BOUNDEDBUFFER_H
 
-#include <queue>
-#include <thread>
-#include <mutex>
-#include <string>
-#include <condition_variable>
-#include "News.h"
+#include "LockedQueue.h"
 
 using namespace std;
 
-class BoundedBuffer {
+class BoundedBuffer : public LockedQueue {
 private:
-    int size;
     int capacity;
-    queue<News> queue_;
-    mutex mutex_;
+
 
 public:
-    BoundedBuffer(int size);
+    BoundedBuffer(int capacity);
 
     News remove();
 

@@ -27,6 +27,8 @@ public:
 
     void sortNews();
 
+    BoundedBuffer *getQByType(NewsType t);
+
 };
 
 #endif //OS4_DISPATCHER_H
