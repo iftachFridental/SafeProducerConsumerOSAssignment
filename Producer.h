@@ -14,17 +14,17 @@ class Producer {
 
 private:
     int prod_id;
-    BoundedBuffer q_;
+    BoundedBuffer* q_;
     int products_num;
     int type_counters[]; // 0- regular, 1- weather, 2- sports
-    std::thread t;
+    std::thread* t;
 
 public:
     Producer(int prod_id, int products_num, int q_capacity);
 
     ~Producer();
 
-    const BoundedBuffer &getQueue() const { return q_; }
+    BoundedBuffer* getQueue(){ return q_; }
 
     void start();
 

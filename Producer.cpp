@@ -19,7 +19,7 @@ public:
         this->type_counters[1] = 0;
         this->type_counters[2] = 0;
 
-        t = NULL;
+        t = nullptr;
         srand(time(nullptr));
     }
 
@@ -50,16 +50,16 @@ public:
 
     void Producer::insertNews() {
         while (products_num > 0) {
-            while (q_.isFull()) { ;
+            while (q_->isFull()) { ;
             }
-            this->q_.lock();
-            q_.insert(generateRandomNews());
-            this->q_.unlock();
+            this->q_->lock();
+            q_->insert(generateRandomNews());
+            this->q_->unlock();
             products_num--;
         }
-        this->q_.lock();
-        this->q_.insert(new News(DONE, this->prod_id, -1));
-        this->q_.unlock();
+        this->q_->lock();
+        this->q_->insert(new News(DONE, this->prod_id, -1));
+        this->q_->unlock();
     }
 
     void Producer::start() {

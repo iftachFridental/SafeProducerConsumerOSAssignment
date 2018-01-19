@@ -8,7 +8,6 @@ public:
 
     BoundedBuffer::BoundedBuffer(int capacity) {
         this->capacity = capacity;
-        this->queue_ = new queue<News>();
         this->size = 0;
     }
 
@@ -44,11 +43,5 @@ public:
     void BoundedBuffer::unlock() {
         mutex_.unlock();
     }
-
-    BoundedBuffer::~BoundedBuffer() {
-        delete queue_;
-        delete mutex_;
-    }
-
 
 };

@@ -24,8 +24,6 @@ private:
 public:
     BoundedBuffer(int size);
 
-    ~BoundedBuffer();
-
     News remove();
 
     bool insert(const News &item);
