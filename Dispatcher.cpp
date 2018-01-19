@@ -10,7 +10,6 @@ Dispatcher::Dispatcher(queue<Producer> &prod_q, int buf_size) {
     this->prod_q = prod_q;
     this->t = nullptr;
 
-    this->types_list = new BoundedBuffer[3];
     this->types_list[0] = new BoundedBuffer(buf_size);
     this->types_list[1] = new BoundedBuffer(buf_size);
     this->types_list[2] = new BoundedBuffer(buf_size);
@@ -70,7 +69,7 @@ void Dispatcher::sortNews() {
         while (types_list[type_ind]->isFull()) { ;
         }
         types_list[type_ind]->lock();
-        types_list[type_ind]->insert(n);
+        types_list[type_ind]->insert(*n);
         types_list[type_ind]->unlock();
         prod_q.push(*p);
     }
@@ -78,11 +77,11 @@ void Dispatcher::sortNews() {
 }
 
 void Dispatcher::sendDones() {
-    for (BoundedBuffer *q : prod_q) {
+    for (BoundedBuffer *q : types_list) {
         while (q->isFull()) { ;
         }
         q->lock();
-        q->insert(new News(DONE, -1, -1));
+        q->insert(News(DONE, -1, -1));
         q->unlock();
     }
 }

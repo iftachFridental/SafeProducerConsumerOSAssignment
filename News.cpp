@@ -30,7 +30,9 @@ string News::toString() const {
             case regularNews:
                 type_name = "NEWS";
                 break;
+            default:
+                break;
         }
-        string s = "Producer " + prod_id + " " + type_name + " " + prod_type_id;
+    string s = "Producer " + to_string(prod_id) + " " + type_name + " " + to_string(prod_type_id);
         return s;
     }

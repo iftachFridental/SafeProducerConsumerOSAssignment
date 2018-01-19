@@ -9,7 +9,7 @@
 #include <thread>
 #include <mutex>
 #include <string>
-#include "News.cpp"
+#include "News.h"
 
 using namespace std;
 

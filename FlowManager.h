@@ -5,9 +5,9 @@
 #ifndef OS4_FLOWMANAGER_H
 #define OS4_FLOWMANAGER_H
 
-#include "Dispatcher.cpp"
-#include "ScreenManager.cpp"
-#include "CoEditor.cpp"
+#include "Dispatcher.h"
+#include "ScreenManager.h"
+#include "CoEditor.h"
 #include <fstream>
 #include <sstream>
 

@@ -5,7 +5,7 @@
 #ifndef OS4_DISPATCHER_H
 #define OS4_DISPATCHER_H
 
-#include "Producer.cpp"
+#include "Producer.h"
 
 class Dispatcher {
 

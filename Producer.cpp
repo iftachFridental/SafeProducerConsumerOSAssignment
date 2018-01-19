@@ -11,7 +11,6 @@ using namespace std;
         this->products_num = products_num;
         q_ = new BoundedBuffer(q_capacity);
 
-        this->type_counters = new int[3];
         this->type_counters[0] = 0;
         this->type_counters[1] = 0;
         this->type_counters[2] = 0;
@@ -41,7 +40,8 @@ using namespace std;
                 break;
         }
         type_counters[random_type]++;
-        return new News(type, this->prod_id, type_counters[random_type] - 1);
+        News n(type, this->prod_id, type_counters[random_type] - 1);
+        return n;
     }
 
     void Producer::insertNews() {
@@ -54,14 +54,14 @@ using namespace std;
             products_num--;
         }
         this->q_->lock();
-        this->q_->insert(new News(DONE, this->prod_id, -1));
+        this->q_->insert(News(DONE, this->prod_id, -1));
         this->q_->unlock();
     }
 
     void Producer::start() {
 
         if (t == NULL) {
-            t = new thread(insertNews);
+            t = new thread(&Producer::insertNews);
         }
     }
 

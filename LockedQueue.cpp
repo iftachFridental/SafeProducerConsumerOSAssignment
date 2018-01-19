@@ -21,7 +21,7 @@ News LockedQueue::remove() {
     return item;
 }
 
-virtual bool LockedQueue::insert(const News &item) {
+bool LockedQueue::insert(const News &item) {
     queue_.push(item);
     size++;
     return true;

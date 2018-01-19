@@ -5,7 +5,7 @@
 #ifndef OS4_BOUNDEDBUFFER_H
 #define OS4_BOUNDEDBUFFER_H
 
-#include "LockedQueue.cpp"
+#include "LockedQueue.h"
 
 using namespace std;
 
