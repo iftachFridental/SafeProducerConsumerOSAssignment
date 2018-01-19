@@ -11,7 +11,7 @@ class Dispatcher {
 
 private:
     std::queue<Producer> prod_q;
-    BoundedBuffer *types_list[];
+    BoundedBuffer *types_list[3];
     std::thread *t;
 
     void sendDones();

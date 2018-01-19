@@ -16,7 +16,7 @@ private:
     int prod_id;
     BoundedBuffer* q_;
     int products_num;
-    int type_counters[]; // 0- regular, 1- weather, 2- sports
+    int type_counters[3]; // 0- regular, 1- weather, 2- sports
     std::thread* t;
 
 public:
