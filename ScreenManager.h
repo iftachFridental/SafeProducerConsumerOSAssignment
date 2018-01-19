@@ -4,7 +4,7 @@
 #ifndef OS4_SCREENMANAGER_H
 #define OS4_SCREENMANAGER_H
 
-#include "LockedQueue.h"
+#include "LockedQueue.cpp"
 
 class ScreenManager {
 private:

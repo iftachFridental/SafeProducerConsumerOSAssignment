@@ -8,7 +8,7 @@
 #include <thread>
 #include <ctime>
 #include <cstdlib>
-#include "BoundedBuffer.h"
+#include "BoundedBuffer.cpp"
 
 class Producer {
 
