@@ -5,7 +5,7 @@
 #ifndef OS4_COEDITOR_H
 #define OS4_COEDITOR_H
 
-#include "Dispatcher.h"
+#include "BoundedBuffer.h"
 #include <chrono>
 
 class CoEditor {
