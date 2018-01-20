@@ -40,6 +40,7 @@ void ScreenManager::start() {
 
 void ScreenManager::stop() {
     if (t != nullptr) {
+        t->join();
         delete t;
         t = nullptr;
     }

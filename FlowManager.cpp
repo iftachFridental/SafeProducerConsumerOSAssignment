@@ -30,6 +30,7 @@ void FlowManager::run() {
     coEditors[1]->start();
     coEditors[2]->start();
     screenManager->start();
+    screenManager->stop();
 }
 
 void FlowManager::initByCfg() {
@@ -39,15 +40,15 @@ void FlowManager::initByCfg() {
         if (line == "")
             continue;
         else if (line.find("PRODUCER ") != string::npos) {
-            int prod_id = stringToInt(line.substr(line.find("PRODUCER "), line.length() - 1));
+            int prod_id = stringToInt(line.substr(line.find(" ")+1, line.length() - 1));
             getline(infile, line);
             int num_of_products = stringToInt(line);
             getline(infile, line);
-            int q_size = stringToInt(line.substr(line.find("queue size = "), line.length() - 1));
+            int q_size = stringToInt(line.substr(line.find("= ") + 2, line.length() - 1));
             Producer *p = new Producer(prod_id, num_of_products, q_size);
             prod_arr.push(*p);
         } else if (line.find("Co-Editor queue size = ") != string::npos) {
-            int coEditors_q_size = stringToInt(line.substr(line.find("Co-Editor queue size = "), line.length() - 1));
+            int coEditors_q_size = stringToInt(line.substr(line.find("= ") + 2, line.length() - 1));
             screenManager = new ScreenManager(coEditors_q_size);
         } else
             continue;
