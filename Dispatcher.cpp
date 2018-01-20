@@ -17,12 +17,14 @@ Dispatcher::Dispatcher(queue<Producer> &prod_q, int buf_size) {
 
 Dispatcher::~Dispatcher() {
     stop();
-    delete[] types_list;
+    delete types_list[0];
+    delete types_list[1];
+    delete types_list[2];
 }
 
 void Dispatcher::start() {
     if (t == nullptr) {
-        t = new thread(sortNews);
+        t = new thread(&Dispatcher::sortNews, this);
     }
 }
 
@@ -36,7 +38,6 @@ void Dispatcher::stop() {
 void Dispatcher::sortNews() {
     Producer *p = nullptr;
     BoundedBuffer *buf = nullptr;
-    News *n;
     while (!prod_q.empty()) {
         p = &(prod_q.front());
         prod_q.pop();
@@ -46,11 +47,11 @@ void Dispatcher::sortNews() {
             continue;
         }
         buf->lock();
-        n = &(buf->remove());
+        News n = buf->remove();
         buf->unlock();
 
         int type_ind = -1;
-        switch (n->getType()) {
+        switch (n.getType()) {
             case regularNews:
                 type_ind = 0;
                 break;
@@ -69,7 +70,7 @@ void Dispatcher::sortNews() {
         while (types_list[type_ind]->isFull()) { ;
         }
         types_list[type_ind]->lock();
-        types_list[type_ind]->insert(*n);
+        types_list[type_ind]->insert(n);
         types_list[type_ind]->unlock();
         prod_q.push(*p);
     }

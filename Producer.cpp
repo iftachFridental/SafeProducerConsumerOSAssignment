@@ -61,7 +61,7 @@ using namespace std;
     void Producer::start() {
 
         if (t == NULL) {
-            t = new thread(&Producer::insertNews);
+            t = new thread(&Producer::insertNews, this);
         }
     }
 

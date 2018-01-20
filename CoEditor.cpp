@@ -16,26 +16,25 @@ CoEditor::~CoEditor() {
 
 void CoEditor::newsToScreen() {
     bool is_done = false;
-    News *n = nullptr;
     while (!is_done) {
         while (news_q->isEmpty()) { ;
         }
         news_q->lock();
-        n = &(news_q->remove());
+        News n = news_q->remove();
         news_q->unlock();
-        if (n->getType() == DONE)
+        if (n.getType() == DONE)
             is_done = true;
         else
-            edit(n);
+            edit(&n);
         screen_q->lock();
-        screen_q->insert(*n);
+        screen_q->insert(n);
         screen_q->unlock();
     }
 }
 
 void CoEditor::start() {
     if (t == nullptr) {
-        t = new thread(newsToScreen);
+        t = new thread(&CoEditor::newsToScreen, this);
     }
 }
 
@@ -47,5 +46,6 @@ void CoEditor::stop() {
 }
 
 void CoEditor::edit(News *n) {
-    this_thread::sleep_for(chrono::milisecond(100));
+    chrono::milliseconds x(100);
+    this_thread::sleep_for(x);
 }
