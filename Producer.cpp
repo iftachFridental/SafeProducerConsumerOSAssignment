@@ -46,13 +46,13 @@ using namespace std;
 
     void Producer::insertNews() {
         while (products_num > 0) {
-            while (q_->isFull()) { ;
-            }
+            while (q_->isFull()) { ; }
             this->q_->lock();
             q_->insert(generateRandomNews());
             this->q_->unlock();
             products_num--;
         }
+        while (q_->isFull()) { ; }
         this->q_->lock();
         this->q_->insert(News(DONE, this->prod_id, -1));
         this->q_->unlock();
