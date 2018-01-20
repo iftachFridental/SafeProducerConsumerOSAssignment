@@ -20,7 +20,7 @@ FlowManager::~FlowManager() {
 
 void FlowManager::run() {
     initByCfg();
-    screenManager = new ScreenManager();
+    dispacher = new Dispatcher(prod_arr);
     coEditors[0] = new CoEditor(this->dispacher->getQByType(regularNews), screenManager->getScreenQueue());
     coEditors[1] = new CoEditor(this->dispacher->getQByType(weather), screenManager->getScreenQueue());
     coEditors[2] = new CoEditor(this->dispacher->getQByType(sports), screenManager->getScreenQueue());
@@ -48,7 +48,7 @@ void FlowManager::initByCfg() {
             prod_arr.push(*p);
         } else if (line.find("Co-Editor queue size = ") != string::npos) {
             int coEditors_q_size = stringToInt(line.substr(line.find("Co-Editor queue size = "), line.length() - 1));
-            dispacher = new Dispatcher(prod_arr, coEditors_q_size);
+            screenManager = new ScreenManager(coEditors_q_size);
         } else
             continue;
     }
