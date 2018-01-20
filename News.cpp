@@ -12,11 +12,6 @@ using namespace std;
         this->prod_type_id = prod_type_id;
     }
 
-ostream &operator<<(ostream &outs, const News *obj) {
-
-        outs << obj->toString();
-        return outs;
-    }
 
 string News::toString() const {
         string type_name = "";

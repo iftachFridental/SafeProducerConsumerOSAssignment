@@ -29,7 +29,7 @@ void ScreenManager::printNews() {
             done_counter++;
             continue;
         }
-        cout << *(n) << endl;
+        cout << n->toString() << endl;
     }
     cout << "Done." << endl;
 }

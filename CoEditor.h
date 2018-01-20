@@ -1,7 +1,7 @@
 //
 // Created by Iftach Fridental on 19/01/2018.
 //
-
+#pragma once
 #ifndef OS4_COEDITOR_H
 #define OS4_COEDITOR_H
 

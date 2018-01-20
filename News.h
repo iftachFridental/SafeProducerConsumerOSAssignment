@@ -1,11 +1,10 @@
 //
 // Created by Iftach Fridental on 19/01/2018.
 //
-
+#pragma once
 #ifndef OS4_NEWS_H
 #define OS4_NEWS_H
 
-#include <iostream>
 #include <string>
 
 enum NewsType {
@@ -26,6 +25,5 @@ public:
     NewsType getType() { return type; }
 };
 
-std::ostream &operator<<(std::ostream &outs, const News *obj);
 
 #endif //OS4_NEWS_H
