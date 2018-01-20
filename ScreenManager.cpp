@@ -6,8 +6,8 @@
 
 using namespace std;
 
-ScreenManager::ScreenManager() {
-    news_q = new LockedQueue();
+ScreenManager::ScreenManager(int capacity) {
+    news_q = new BoundedBuffer(capacity);
     t = nullptr;
 }
 
@@ -45,7 +45,7 @@ void ScreenManager::stop() {
     }
 }
 
-LockedQueue *ScreenManager::getScreenQueue() {
+BoundedBuffer *ScreenManager::getScreenQueue() {
     return this->news_q;
 }
 

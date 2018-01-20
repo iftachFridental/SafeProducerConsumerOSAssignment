@@ -4,7 +4,7 @@
 
 #include "CoEditor.h"
 
-CoEditor::CoEditor(BoundedBuffer *news_q, LockedQueue *screen_q) {
+CoEditor::CoEditor(LockedQueue *news_q, BoundedBuffer *screen_q) {
     this->news_q = news_q;
     this->screen_q = screen_q;
     t = nullptr;
@@ -26,6 +26,7 @@ void CoEditor::newsToScreen() {
             is_done = true;
         else
             edit(&n);
+        while (screen_q->isFull()){ ; }
         screen_q->lock();
         screen_q->insert(n);
         screen_q->unlock();

@@ -11,12 +11,12 @@
 class CoEditor {
 
 private:
-    BoundedBuffer *news_q;
-    LockedQueue *screen_q;
+    LockedQueue *news_q;
+    BoundedBuffer *screen_q;
     std::thread *t;
 
 public:
-    CoEditor(BoundedBuffer *news_q, LockedQueue *screen_q);
+    CoEditor(LockedQueue *news_q, BoundedBuffer *screen_q);
 
     ~CoEditor();
 

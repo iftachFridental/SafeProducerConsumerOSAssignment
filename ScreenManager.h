@@ -5,20 +5,20 @@
 #ifndef OS4_SCREENMANAGER_H
 #define OS4_SCREENMANAGER_H
 
-#include "LockedQueue.h"
+#include "BoundedBuffer.h"
 #include <iostream>
 
 class ScreenManager {
 private:
-    LockedQueue *news_q;
+    BoundedBuffer *news_q;
     std::thread *t;
 
 public:
-    ScreenManager();
+    ScreenManager(int capacity);
 
     ~ScreenManager();
 
-    LockedQueue *getScreenQueue();
+    BoundedBuffer *getScreenQueue();
 
     void printNews();
 

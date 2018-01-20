@@ -6,13 +6,13 @@
 
 using namespace std;
 
-Dispatcher::Dispatcher(queue<Producer> &prod_q, int buf_size) {
+Dispatcher::Dispatcher(queue<Producer> &prod_q) {
     this->prod_q = prod_q;
     this->t = nullptr;
 
-    this->types_list[0] = new BoundedBuffer(buf_size);
-    this->types_list[1] = new BoundedBuffer(buf_size);
-    this->types_list[2] = new BoundedBuffer(buf_size);
+    this->types_list[0] = new LockedQueue();
+    this->types_list[1] = new LockedQueue();
+    this->types_list[2] = new LockedQueue();
 }
 
 Dispatcher::~Dispatcher() {
@@ -67,8 +67,6 @@ void Dispatcher::sortNews() {
                 continue;
         }
 
-        while (types_list[type_ind]->isFull()) { ;
-        }
         types_list[type_ind]->lock();
         types_list[type_ind]->insert(n);
         types_list[type_ind]->unlock();
@@ -78,16 +76,14 @@ void Dispatcher::sortNews() {
 }
 
 void Dispatcher::sendDones() {
-    for (BoundedBuffer *q : types_list) {
-        while (q->isFull()) { ;
-        }
+    for (LockedQueue *q : types_list) {
         q->lock();
         q->insert(News(DONE, -1, -1));
         q->unlock();
     }
 }
 
-BoundedBuffer *Dispatcher::getQByType(NewsType t) {
+LockedQueue *Dispatcher::getQByType(NewsType t) {
 
     int type_ind = -1;
     switch (t) {

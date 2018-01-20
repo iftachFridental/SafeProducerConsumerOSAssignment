@@ -11,13 +11,13 @@ class Dispatcher {
 
 private:
     std::queue<Producer> prod_q;
-    BoundedBuffer *types_list[3];
+    LockedQueue *types_list[3];
     std::thread *t;
 
     void sendDones();
 
 public:
-    Dispatcher(queue<Producer> &prod_q, int buf_size);
+    Dispatcher(queue<Producer> &prod_q);
 
     ~Dispatcher();
 
@@ -27,7 +27,7 @@ public:
 
     void sortNews();
 
-    BoundedBuffer *getQByType(NewsType t);
+    LockedQueue *getQByType(NewsType t);
 
 };
 
