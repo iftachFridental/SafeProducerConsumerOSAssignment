@@ -17,15 +17,8 @@ private:
 public:
     BoundedBuffer(int capacity);
 
-    News remove();
-
+    virtual ~BoundedBuffer() { ; }
     bool insert(const News &item);
-
-    bool isEmpty();
-
-    void lock();
-
-    void unlock();
 
     bool isFull();
 };

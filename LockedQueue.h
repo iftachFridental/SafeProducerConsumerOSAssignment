@@ -22,6 +22,7 @@ protected:
 public:
     LockedQueue();
 
+    virtual ~LockedQueue() { ; }
     News remove();
 
     virtual bool insert(const News &item);

@@ -60,14 +60,14 @@ using namespace std;
 
     void Producer::start() {
 
-        if (t == NULL) {
+        if (t == nullptr) {
             t = new thread(&Producer::insertNews, this);
         }
     }
 
     void Producer::stop() {
-        if (t != NULL) {
+        if (t != nullptr) {
             delete t;
-            t = NULL;
+            t = nullptr;
         }
     }
